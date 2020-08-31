@@ -1,0 +1,511 @@
+import random
+import time
+
+
+def print_pause(string):
+    print(string)
+    time.sleep(2)
+
+
+def valid_input(prompt, options):
+    while True:
+        response = input(prompt).lower()
+        for option in options:
+            if option in response:
+                return response
+        print_pause("Invalid input")
+
+
+def valid_number_input(prompt):
+    while True:
+        try:
+            number = int(input(prompt))
+        except ValueError:
+            print("Invalid input\n")
+        else:
+            return number
+
+
+def get_safe_code_one(equation_one, addition_equations):
+    if equation_one == addition_equations[0]:
+        return 5
+    elif equation_one == addition_equations[1]:
+        return 6
+    elif equation_one == addition_equations[2]:
+        return 7
+    else:
+        return 8
+
+
+def get_safe_code_two(equation_two, subtraction_equations):
+    if equation_two == subtraction_equations[0]:
+        return 10
+    elif equation_two == subtraction_equations[1]:
+        return 11
+    elif equation_two == subtraction_equations[2]:
+        return 12
+    else:
+        return 13
+
+
+def get_safe_code_three(equation_three, multiplication_equations):
+    if equation_three == multiplication_equations[0]:
+        return 25
+    elif equation_three == multiplication_equations[1]:
+        return 36
+    elif equation_three == multiplication_equations[2]:
+        return 24
+    else:
+        return 45
+
+
+def intro(items, yesorno, door_code, white_number, red_number, yellow_number,
+          green_number, girl_name, equation_one, equation_two, equation_three,
+          right_book, safe_code_one, safe_code_two, safe_code_three, books):
+    print_pause("Welcome to Escape the Room!")
+    print_pause("...........zzz....")
+    print_pause("....You wake up in a room you don't recognize...")
+    print_pause("You try to leave but the door is locked!")
+    print_pause("Maybe you can discover a way out by inspecting the room!")
+    room(items, yesorno, door_code, white_number, red_number, yellow_number,
+         green_number, girl_name, equation_one, equation_two, equation_three,
+         right_book, safe_code_one, safe_code_two, safe_code_three, books)
+
+
+def room(items, yesorno, door_code, white_number, red_number, yellow_number,
+         green_number, girl_name, equation_one, equation_two, equation_three,
+         right_book, safe_code_one, safe_code_two, safe_code_three, books):
+    print_pause("What would you like to inspect?")
+    response = valid_input("1: The Door\n2: The Safe\n3: The Computer\n"
+                           "4: The Coffee Table\n5: The Bookshelf\n"
+                           "6: The Painting\n7: The Rug\n8: The Ceiling\n",
+                           ["1", "2", "3", "4", "5", "6", "7", "8"])
+    if response == "1":
+        door(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books)
+    elif response == "2":
+        safe(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books)
+    elif response == "3":
+        computer(items, yesorno, door_code, white_number, red_number,
+                 yellow_number, green_number, girl_name, equation_one,
+                 equation_two, equation_three, right_book, safe_code_one,
+                 safe_code_two, safe_code_three, books)
+    elif response == "4":
+        table(items, yesorno, door_code, white_number, red_number,
+              yellow_number, green_number, girl_name, equation_one,
+              equation_two, equation_three, right_book, safe_code_one,
+              safe_code_two, safe_code_three, books)
+    elif response == "5":
+        bookshelf(items, yesorno, door_code, white_number, red_number,
+                  yellow_number, green_number, girl_name, equation_one,
+                  equation_two, equation_three, right_book, safe_code_one,
+                  safe_code_two, safe_code_three, books)
+    elif response == "6":
+        painting(items, yesorno, door_code, white_number, red_number,
+                 yellow_number, green_number, girl_name, equation_one,
+                 equation_two, equation_three, right_book, safe_code_one,
+                 safe_code_two, safe_code_three, books)
+    elif response == "7":
+        rug(items, yesorno, door_code, white_number, red_number, yellow_number,
+            green_number, girl_name, equation_one, equation_two,
+            equation_three, right_book, safe_code_one, safe_code_two,
+            safe_code_three, books)
+    else:
+        ceiling(items, yesorno, door_code, white_number, red_number,
+                yellow_number, green_number, girl_name, equation_one,
+                equation_two, equation_three, right_book, safe_code_one,
+                safe_code_two, safe_code_three, books)
+
+
+def door(items, yesorno, door_code, white_number, red_number, yellow_number,
+         green_number, girl_name, equation_one, equation_two, equation_three,
+         right_book, safe_code_one, safe_code_two, safe_code_three, books):
+    print_pause(f"You notice the door has a large white {white_number} "
+                "painted on it.")
+    print_pause("There is a keypad with the numbers "
+                "0 through 9 next to the door!")
+    print_pause("WARNING: You have ONE attempt to guess the passcode. "
+                "If you guess incorrectly, you'll be locked inside FOREVER!!!")
+    response = valid_input("Would you like to guess the passcode? "
+                           "(YES or NO)\n", yesorno)
+    if response == "no":
+        print_pause("You decide to search for more clues before "
+                    "guessing the passcode.")
+        room(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books)
+    if response == "yes":
+        code_guess = input("Please enter the code:\n")
+        if code_guess == door_code:
+            print_pause("...............")
+            print_pause("The light turns green! The door is now unlocked!")
+            print_pause("You open the door and escape to freedom!")
+            print_pause("Congratulatons, you won! Thanks for playing!")
+            play_again(items, yesorno, door_code, white_number, red_number,
+                       yellow_number, green_number, girl_name, equation_one,
+                       equation_two, equation_three, right_book, safe_code_one,
+                       safe_code_two, safe_code_three, books)
+        else:
+            print_pause("...............")
+            print_pause("INCORRECT PASSWORD")
+            print_pause("You hear a loud buzzer noise "
+                        "as the door locks itself...")
+            print_pause("PERMANENTLY!!!!")
+            print_pause("You lost!")
+            play_again(items, yesorno, door_code, white_number, red_number,
+                       yellow_number, green_number, girl_name, equation_one,
+                       equation_two, equation_three, right_book, safe_code_one,
+                       safe_code_two, safe_code_three, books)
+
+
+def play_again(items, yesorno, door_code, white_number, red_number,
+               yellow_number, green_number, girl_name, equation_one,
+               equation_two, equation_three, right_book, safe_code_one,
+               safe_code_two, safe_code_three, books):
+    response = valid_input("Would you like to try again? "
+                           "(YES or NO)\n", yesorno)
+    if response == "yes":
+        print_pause("Resetting 'Escape the Room'...")
+        print_pause("Generating new passcodes...")
+        play_game()
+    else:
+        print_pause("Goodbye!")
+
+
+def rug(items, yesorno, door_code, white_number, red_number, yellow_number,
+        green_number, girl_name, equation_one, equation_two, equation_three,
+        right_book, safe_code_one, safe_code_two, safe_code_three, books):
+    print_pause(f"You lift up the rug and see a large red {red_number} "
+                "painted on the floor.")
+    if "key" in items:
+        print_pause("There's nothing else to find here.")
+        room(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books)
+    else:
+        print_pause("You also notice a small key hidden underneath!")
+        print_pause("You pick up the key and wonder what it might unlock...")
+        items.append("key")
+        room(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books)
+
+
+def table(items, yesorno, door_code, white_number, red_number, yellow_number,
+          green_number, girl_name, equation_one, equation_two, equation_three,
+          right_book, safe_code_one, safe_code_two, safe_code_three, books):
+    if "polaroid" in items:
+        print_pause("The notebook and polaroid sit atop the "
+                    "pile of junk on the table.")
+        response = valid_input("What would you like to do?\n"
+                               "1. Open the notebook\n"
+                               "2. Inspect the polaroid\n"
+                               "3. Look somewhere else\n", ["1", "2", "3"])
+        if response == "1":
+            notebook(items, yesorno, door_code, white_number, red_number,
+                     yellow_number, green_number, girl_name, equation_one,
+                     equation_two, equation_three, right_book, safe_code_one,
+                     safe_code_two, safe_code_three, books)
+        elif response == "2":
+            print_pause("You inspect the polaroid once again.")
+            print_pause("It's a picture of a young girl, with the name "
+                        f"'{girl_name}' written on the bottom.")
+            room(items, yesorno, door_code, white_number, red_number,
+                 yellow_number, green_number, girl_name, equation_one,
+                 equation_two, equation_three, right_book, safe_code_one,
+                 safe_code_two, safe_code_three, books)
+        else:
+            room(items, yesorno, door_code, white_number, red_number,
+                 yellow_number, green_number, girl_name, equation_one,
+                 equation_two, equation_three, right_book, safe_code_one,
+                 safe_code_two, safe_code_three, books)
+    else:
+        print_pause("The table is covered in junk, but your eye is drawn to a "
+                    "little black notebook and a wooden keepsake box.")
+        response = valid_input("What would you like to do?\n"
+                               "1. Open the notebook\n2. Open the box\n"
+                               "3. Look somewhere else\n", ["1", "2", "3"])
+        if response == "1":
+            notebook(items, yesorno, door_code, white_number, red_number,
+                     yellow_number, green_number, girl_name, equation_one,
+                     equation_two, equation_three, right_book, safe_code_one,
+                     safe_code_two, safe_code_three, books)
+        if response == "2":
+            print_pause("You pick up the box and try to open it, "
+                        "but it's locked!")
+            if "key" in items:
+                print_pause("You try inserting the key you found, "
+                            "and...it fits!")
+                print_pause("You unlock the box and inside you find "
+                            "an old polaroid.")
+                print_pause("It's a picture of a young girl, with the name "
+                            f"'{girl_name}' written on the bottom.")
+                items.append("polaroid")
+                room(items, yesorno, door_code, white_number, red_number,
+                     yellow_number, green_number, girl_name, equation_one,
+                     equation_two, equation_three, right_book, safe_code_one,
+                     safe_code_two, safe_code_three, books)
+            else:
+                room(items, yesorno, door_code, white_number, red_number,
+                     yellow_number, green_number, girl_name, equation_one,
+                     equation_two, equation_three, right_book, safe_code_one,
+                     safe_code_two, safe_code_three, books)
+        else:
+            room(items, yesorno, door_code, white_number, red_number,
+                 yellow_number, green_number, girl_name, equation_one,
+                 equation_two, equation_three, right_book, safe_code_one,
+                 safe_code_two, safe_code_three, books)
+
+
+def notebook(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books):
+    print_pause("You pick up the notebook and open it.")
+    print_pause("The first page has a heading that reads:\n"
+                "'Simple Arithmetic For Everyone!'")
+    print_pause("Underneath are the following math equations:")
+    print(equation_one)
+    print(equation_two)
+    print_pause(equation_three)
+    room(items, yesorno, door_code, white_number, red_number, yellow_number,
+         green_number, girl_name, equation_one, equation_two, equation_three,
+         right_book, safe_code_one, safe_code_two, safe_code_three, books)
+
+
+def safe(items, yesorno, door_code, white_number, red_number, yellow_number,
+         green_number, girl_name, equation_one, equation_two, equation_three,
+         right_book, safe_code_one, safe_code_two, safe_code_three, books):
+    print_pause("There is a small metal safe against the wall.")
+    response = valid_input("Will you attempt to open the safe? (YES or NO)\n",
+                           yesorno)
+    if response == "no":
+        room(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books)
+    else:
+        print_pause("You start by turning the knob to the right.")
+        guess_one = valid_number_input("What number do you stop on?\n")
+        if guess_one != safe_code_one:
+            print_pause("Hmm...that didn't seem to do anything...")
+            room(items, yesorno, door_code, white_number, red_number,
+                 yellow_number, green_number, girl_name, equation_one,
+                 equation_two, equation_three, right_book, safe_code_one,
+                 safe_code_two, safe_code_three, books)
+        else:
+            print_pause("You hear a click! That's a good sign!")
+            guess_two = valid_number_input("You turn the knob "
+                                           "back to the left. "
+                                           "What number do you stop on?\n")
+            if guess_two != safe_code_two:
+                print_pause("Hmm...that doesn't seem to be correct...")
+                room(items, yesorno, door_code, white_number, red_number,
+                     yellow_number, green_number, girl_name, equation_one,
+                     equation_two, equation_three, right_book, safe_code_one,
+                     safe_code_two, safe_code_three, books)
+            else:
+                print_pause("You hear another click! You're getting close!")
+                guess_three = valid_number_input("You turn the knob back to "
+                                                 "the right. What number "
+                                                 "do you stop on?\n")
+                if guess_three != safe_code_three:
+                    print_pause("Arghh! Almost had it!")
+                    room(items, yesorno, door_code, white_number, red_number,
+                         yellow_number, green_number, girl_name, equation_one,
+                         equation_two, equation_three, right_book,
+                         safe_code_one, safe_code_two, safe_code_three, books)
+                else:
+                    print_pause("The safe clicks again! You pull on the door "
+                                "and it pops open!")
+                    print_pause("You reach into the safe and pull out "
+                                "a blacklight!")
+                    items.append("blacklight")
+                    print_pause("You can use this to reveal "
+                                "invisible messages!")
+                    room(items, yesorno, door_code, white_number, red_number,
+                         yellow_number, green_number, girl_name, equation_one,
+                         equation_two, equation_three, right_book,
+                         safe_code_one, safe_code_two, safe_code_three, books)
+
+
+def ceiling(items, yesorno, door_code, white_number, red_number, yellow_number,
+            green_number, girl_name, equation_one, equation_two,
+            equation_three, right_book, safe_code_one, safe_code_two,
+            safe_code_three, books):
+    print_pause("You look up at the blank white ceiling.")
+    if "blacklight" not in items:
+        print_pause("There doesn't seem to be anything of interest...")
+    else:
+        print_pause("You shine the blacklight on the ceiling and a hidden "
+                    "message is revealed!")
+        print_pause("It reads: 'WHITE - RED - YELLOW - GREEN'")
+        print_pause("What could that mean?")
+    room(items, yesorno, door_code, white_number, red_number,
+         yellow_number, green_number, girl_name, equation_one,
+         equation_two, equation_three, right_book, safe_code_one,
+         safe_code_two, safe_code_three, books)
+
+
+def computer(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books):
+    if "computer" not in items:
+        print_pause("You attempt to log on to the computer on the desk, "
+                    "but there is a password.")
+        print_pause("There is a sticky note on the monitor that reads:\n"
+                    "password hint: my beautiful daughter")
+        response = valid_input("Do you want to guess the password? "
+                               "(YES or NO)\n", yesorno)
+        if response == "no":
+            print_pause("Maybe you can find a hint somewhere else "
+                        "in the room...")
+            room(items, yesorno, door_code, white_number, red_number,
+                 yellow_number, green_number, girl_name, equation_one,
+                 equation_two, equation_three, right_book, safe_code_one,
+                 safe_code_two, safe_code_three, books)
+        else:
+            response = input("Type the *case sensitive* password and "
+                             "hit enter:\n")
+            if response != girl_name:
+                print_pause("*validating password*")
+                print_pause("PASSWORD INCORRECT")
+                print_pause("Maybe you can find a hint somewhere else "
+                            "in the room...")
+                room(items, yesorno, door_code, white_number, red_number,
+                     yellow_number, green_number, girl_name, equation_one,
+                     equation_two, equation_three, right_book, safe_code_one,
+                     safe_code_two, safe_code_three, books)
+            else:
+                print_pause("*validating password*")
+                print_pause("PASSWORD ACCEPTED")
+                print_pause("You successfully logged on to the computer!")
+                items.append("computer")
+                print_pause("There are no files on the computer, only a large "
+                            f"green {green_number} as the "
+                            "desktop background...")
+                room(items, yesorno, door_code, white_number, red_number,
+                     yellow_number, green_number, girl_name, equation_one,
+                     equation_two, equation_three, right_book, safe_code_one,
+                     safe_code_two, safe_code_three, books)
+    else:
+        print_pause("There are no files on the computer, only a large "
+                    f"green {green_number} as the desktop background...")
+        room(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books)
+
+
+def painting(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books):
+    print_pause("You take a close look at the painting on the wall...")
+    if right_book == books[0]:
+        print_pause("It's of a young boy whitewashing a picket fence!")
+    elif right_book == books[1]:
+        print_pause("It's of an enormous white whale!")
+    elif right_book == books[2]:
+        print_pause("It's of a scientist creating a zombified monster!")
+    elif right_book == books[3]:
+        print_pause("It's of a lavish mansion party in the 1920's!")
+    elif right_book == books[4]:
+        print_pause("It's of four sisters in the 1800's!")
+    elif right_book == books[5]:
+        print_pause("It's of a short man with hairy feet living in the "
+                    "side of a hill!")
+    else:
+        print_pause("It's of a Puritan woman with a red 'A' on her dress!")
+    room(items, yesorno, door_code, white_number, red_number,
+         yellow_number, green_number, girl_name, equation_one,
+         equation_two, equation_three, right_book, safe_code_one,
+         safe_code_two, safe_code_three, books)
+
+
+def bookshelf(items, yesorno, door_code, white_number, red_number,
+              yellow_number, green_number, girl_name, equation_one,
+              equation_two, equation_three, right_book, safe_code_one,
+              safe_code_two, safe_code_three, books):
+    if "book" in items:
+        print_pause("You check the back cover of the book again to find the "
+                    f"number {yellow_number} written in yellow paint.")
+        room(items, yesorno, door_code, white_number, red_number,
+             yellow_number, green_number, girl_name, equation_one,
+             equation_two, equation_three, right_book, safe_code_one,
+             safe_code_two, safe_code_three, books)
+    else:
+        print_pause("There are several classic books on the shelf, including:")
+        print_pause("The Adventures of Tom Sawyer, Moby Dick, Frankenstein, "
+                    "The Great Gatsby, Little Women, The Hobbit, and "
+                    "The Scarlet Letter.")
+        response = valid_input("Will you look at a book for clues? "
+                               "(YES or NO)\n", yesorno)
+        if response == "no":
+            room(items, yesorno, door_code, white_number, red_number,
+                 yellow_number, green_number, girl_name, equation_one,
+                 equation_two, equation_three, right_book, safe_code_one,
+                 safe_code_two, safe_code_three, books)
+        else:
+            choice = valid_input("Which book would you like to inspect?\n",
+                                 books)
+            if choice != right_book:
+                print_pause("You take the book off the shelf and "
+                            "flip through it...")
+                print_pause("There doesn't seem to be any hints in here!")
+            else:
+                print_pause("You pull the book off the shelf and...oh!")
+                print_pause(f"There is a yellow {yellow_number} "
+                            "painted on the back cover!")
+                print_pause("You put the book on top of the shelf, "
+                            "separate from the others.")
+                items.append("book")
+            room(items, yesorno, door_code, white_number, red_number,
+                 yellow_number, green_number, girl_name, equation_one,
+                 equation_two, equation_three, right_book, safe_code_one,
+                 safe_code_two, safe_code_three, books)
+
+
+def play_game():
+    items = []
+    yesorno = ["yes", "no"]
+    door_code = str(random.randint(1000, 9999))
+    white_number = door_code[0]
+    red_number = door_code[1]
+    yellow_number = door_code[2]
+    green_number = door_code[3]
+    girl_name = random.choice(["Abigail", "Betty", "Catherine", "Danielle",
+                               "Emily", "Fiona", "Grace", "Hannah", "Isabelle",
+                               "Jennifer", "Karen"])
+    addition_equations = ["2 + 3 = ?", "4 + 2 = ?",
+                          "3 + 4 = ?", "6 + 2 = ?"]
+    subtraction_equations = ["20 - 10 = ?", "19 - 8 = ?",
+                             "16 - 4 = ?", "21 - 8 = ?"]
+    multiplication_equations = ["5 * 5 = ?", "6 * 6 = ?",
+                                "4 * 6 = ?", "9 * 5 = ?"]
+    equation_one = random.choice(addition_equations)
+    equation_two = random.choice(subtraction_equations)
+    equation_three = random.choice(multiplication_equations)
+    safe_code_one = get_safe_code_one(equation_one, addition_equations)
+    safe_code_two = get_safe_code_two(equation_two, subtraction_equations)
+    safe_code_three = get_safe_code_three(equation_three,
+                                          multiplication_equations)
+    books = ["the adventures of tom sawyer", "moby dick", "frankenstein",
+             "the great gatsby", "little women", "the hobbit",
+             "the scarlet letter"]
+    right_book = random.choice(books)
+    intro(items, yesorno, door_code, white_number, red_number, yellow_number,
+          green_number, girl_name, equation_one, equation_two, equation_three,
+          right_book, safe_code_one, safe_code_two, safe_code_three, books)
+
+
+play_game()
